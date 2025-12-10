@@ -2,6 +2,6 @@
 
 ## Instalación
 
-´´´shell
+¨¨¨shell
 npm install
-´´´
+¨¨¨
