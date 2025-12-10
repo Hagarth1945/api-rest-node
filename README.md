@@ -1,5 +1,7 @@
 # API REST NodeJS
 
-'''shell
+## Instalación
+
+´´´shell
 npm install
-'''
+´´´
