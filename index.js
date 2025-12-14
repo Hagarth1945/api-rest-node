@@ -53,12 +53,24 @@ app.get('/', (req, res) => {
 app.get('/productos', (req, res) => {
     const { categoria } = req.query;
     if (categoria) {
-        const productosFiltrados = productos.filter((item) => item.categoria.includes(categoria)
+        const productosFiltrados = productos.filter((item) => item.categoria.toLowerCase().includes(categoria.toLowerCase())
         );
         res.json(productosFiltrados);
         return;
     }
     res.json(productos);
+})
+
+app.get('/productos/search', (req, res) => {
+    const { nombre } = req.query;
+    if (!nombre) {
+        return res.status(400).json ({ error: 'No se proporcionó el parámetro "nombre"' });
+    }
+    const productosFiltrados = productos.filter((item) => item.nombre.toLowerCase().includes(nombre.toLowerCase()));
+    if (productosFiltrados.length == 0) {
+        return res.status(404).json ({ error: 'No se encontraron productos' });
+    }
+    res.json(productosFiltrados);
 })
 
 app.get('/productos/:id', (req, res) => {
