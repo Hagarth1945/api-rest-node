@@ -1,7 +1,7 @@
 {
   "name": "api-rest-node",
   "version": "1.0.0",
-  "description": "",
+  "description": "¨¨¨shell\r npm install\r ¨¨¨",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,5 +11,8 @@
   "keywords": [],
   "author": "Santiago Andrés Campellone",
   "license": "MIT",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
