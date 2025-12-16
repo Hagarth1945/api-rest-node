@@ -46,3 +46,56 @@ export const createProducto = async (req, res) => {
 
     res.status(201).json(producto);
 }
+
+export const updateProducto = async (req, res) => {
+    const { id } = req.params;
+    const { nombre, precio, categoria } = req.body;
+
+    if (!nombre || !precio || !categoria) {
+        return res
+        .status(422)
+        .json({ error: 'Todos los campos son obligatorios' });
+    }
+
+    const updated = await Model.updateProducto(id, { nombre, precio, categoria });
+
+    if (!updated) {
+        res.status(404).json({ error: 'Producto no encontrado' });
+    }
+    res.json(updated);
+
+}
+
+export const updatePatchProducto = async (req, res) => {
+    const { id } = req.params;
+
+    const data = {}
+    if (req.body.nombre !== undefined) data.nombre = req.body.nombre;
+    if (req.body.precio !== undefined) data.precio = req.body.precio;
+    if (req.body.categoria !== undefined) data.categoria = req.body.categoria;
+
+    if (Object.keys(data).length === 0) {
+        return res
+        .status(422)
+        .json({ error: 'No se proporcionaron campos para actualizar.' });
+    }
+
+    const updated = await Model.updatePatchProducto(id, data);
+
+    if (!updated) {
+        res.status(404).json({ error: 'Producto no encontrado' });
+    }
+    res.json(updated);
+
+}
+
+export const deleteProducto = async (req, res) => {
+    const { id } = req.params;
+
+    const deleted = await Model.deleteProducto(id);
+
+    if (!deleted) {
+        res.status(404).json({ error: 'Producto no encontrado' });
+    }
+    res.status(204).send();
+}

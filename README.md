@@ -106,3 +106,11 @@ npm run dev
     ]
 }
 ```
+
+### Eliminar un producto
+
+- **DELETE** `/productos/:id`
+- **Descripción:** Elimina un producto por su ID-
+- **Parámetros:**
+    - `id` (path, requerido): ID del producto eliminado.
+- **Respuesta:** 204 No Content
