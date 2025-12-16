@@ -3,13 +3,12 @@ import * as Model from "../models/productos.model.js";
 export const getAllProductos = async (req, res) => {
     const { categoria } = req.query;
 
-    const productos = await Model.getAllProductos();
-
     if (categoria) {
-        const productosFiltrados = productos.filter((item) => item.categoria.toLowerCase().includes(categoria.toLowerCase())
-        );
-        res.json(productosFiltrados);
-        return;
+        const productosByCategoria = await Model.getProductoByCategory(categoria);
+        
+        return res.json(productosByCategoria);
+
+    const productos = await Model.getAllProductos();
     }
     res.json(productos);
 }

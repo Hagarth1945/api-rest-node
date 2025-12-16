@@ -7,7 +7,9 @@ import {
     getDoc, 
     addDoc, 
     deleteDoc,
-    setDoc 
+    setDoc,
+    query,
+    where
 } from "firebase/firestore";
 
 const productosCollection = collection(db, "productos");
@@ -26,6 +28,20 @@ export const getProductoById = async (id) => {
         const productRef = doc(productosCollection, id);
         const snapshot = await getDoc(productRef);
         return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getProductoByCategory = async (category) => {
+    try {
+        const q = query(
+            productosCollection, 
+            where("categoria", "array-contains", category));
+        
+        const snapshot = await getDocs(q);
+        return snapshot.docs.map((doc) => ({ 
+            id: doc.id, ...doc.data() }));
     } catch (error) {
         console.error(error);
     }
