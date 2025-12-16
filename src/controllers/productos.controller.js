@@ -38,3 +38,11 @@ export const getProductoById = async (req, res) => {
     }
     res.json(producto);
 }
+
+export const createProducto = async (req, res) => {
+    const { nombre, precio, categoria } = req.body;
+
+    const producto = await Model.createProducto({ nombre, precio, categoria });
+
+    res.status(201).json(producto);
+}
