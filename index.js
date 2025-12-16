@@ -1,8 +1,14 @@
 import 'dotenv/config';
 import express from 'express';
-import { verifyToken } from './src/middlewares/verify-token.js';
+import cors from 'cors';
+
+import productosRouter from './src/routes/productos.router.js';
+import authRouter from './src/routes/auth.router.js';
+import notFound from './src/middlewares/not-found.js';
 
 const app = express();
+
+app.use(cors());          
 
 app.use(express.json());
 
@@ -10,13 +16,9 @@ app.get('/', (req, res) => {
     res.json({ message: 'Bienvenidos a mi API!' });
 })
 
-import authRouter from './src/routes/auth.router.js';
 app.use('/api/auth', authRouter);
 
-import productosRouter from './src/routes/productos.router.js';
-app.use('/api', verifyToken, productosRouter);
-
-import notFound from './src/middlewares/not-found.js';
+app.use('/api', productosRouter);
 
 app.use(notFound)
 

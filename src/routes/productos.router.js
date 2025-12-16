@@ -1,5 +1,6 @@
 import { Router } from "express";
 import auth from "../middlewares/verify-token.js";
+import verifyToken from '../middlewares/verify-token.js';
 
 const router = Router();
 
@@ -19,9 +20,9 @@ router.get('/productos/:id', getProductoById)
 
 router.post('/productos', auth, createProducto)
 
-router.put('/productos/:id', updateProducto)
-router.patch('/productos/:id', updatePatchProducto)
+router.put('/productos/:id', auth, updateProducto)
+router.patch('/productos/:id', auth, updatePatchProducto)
 
-router.delete('/productos/:id', deleteProducto)
+router.delete('/productos/:id', auth, deleteProducto)
 
 export default router;
