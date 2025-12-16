@@ -10,7 +10,8 @@ app.get('/', (req, res) => {
     res.json({ message: 'Bienvenidos a mi API!' });
 })
 
-app.use('/api', productosRouter);
+import authRouter from './src/routes/auth.router.js';
+app.use('/api/auth', authRouter);
 
 import productosRouter from './src/routes/productos.router.js';
 app.use('/api', verifyToken, productosRouter);
@@ -21,8 +22,6 @@ app.use(notFound)
 
 const port = process.env.PORT || 3001;
 
-// app.listen(port, () => {
-//     console.log(`http://localhost:${port}`);
-// });
-
-export default app;
+app.listen(port, () => {
+    console.log(`http://localhost:${port}`);
+});
