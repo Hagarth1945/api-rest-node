@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import { verifyToken } from './src/middlewares/verify-token.js';
 
 const app = express();
 
@@ -13,7 +14,7 @@ import authRouter from './src/routes/auth.router.js';
 app.use('/api/auth', authRouter);
 
 import productosRouter from './src/routes/productos.router.js';
-app.use('/api', productosRouter);
+app.use('/api', verifyToken, productosRouter);
 
 import notFound from './src/middlewares/not-found.js';
 
