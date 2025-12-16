@@ -10,8 +10,7 @@ app.get('/', (req, res) => {
     res.json({ message: 'Bienvenidos a mi API!' });
 })
 
-import authRouter from './src/routes/auth.router.js';
-app.use('/api/auth', authRouter);
+app.use('/api', productosRouter);
 
 import productosRouter from './src/routes/productos.router.js';
 app.use('/api', verifyToken, productosRouter);

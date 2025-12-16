@@ -1,4 +1,5 @@
 import { Router } from "express";
+import auth from "../middlewares/verify-token.js";
 
 const router = Router();
 
